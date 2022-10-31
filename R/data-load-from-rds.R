@@ -1,4 +1,4 @@
-dataFileLocation <- "data/datasets"
+dataFileLocation <- "data/datasets.knaresborough"
 
 dataFiles <- list.files(dataFileLocation, full.names = TRUE)
 
