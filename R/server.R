@@ -43,11 +43,12 @@ server <- function(input, output, session) {
     dims_available <- lapply(user_datasets(),
                              function(ds) {
                                names(ds$dimensions)
-                             }) %>%
-      unlist() %>%
+                             }) |>
+      unlist() |>
       unique()
 
-    dims_available <- dims_available[dims_available != "variable"] # variable now hard coded
+    # variable now hard coded
+    dims_available <- dims_available[dims_available != "variable"]
     lapply(dims_available, function(i) {
       value <- isolate(input[[i]])
       selectInput(i,
@@ -74,9 +75,9 @@ server <- function(input, output, session) {
   })
 
    transformation_date_choices <- reactive({
-    df <- selected_data_df() %>%
-      dplyr::group_by(dates$date) %>%
-      dplyr::summarise(n = dplyr::n()) %>%
+    df <- selected_data_df() |>
+      dplyr::group_by(dates$date) |>
+      dplyr::summarise(n = dplyr::n()) |>
       dplyr::filter(n == max(n))
     df$`dates$date`
   })
@@ -95,8 +96,8 @@ server <- function(input, output, session) {
 
   output$frequency <- renderUI({
     req(input$dataset)
-    frequencies <- lapply(user_datasets(), function(ds) ds$data$dates) %>%
-      dplyr::bind_rows(.id = "dataset") %>%
+    frequencies <- lapply(user_datasets(), function(ds) ds$data$dates) |>
+      dplyr::bind_rows(.id = "dataset") |>
       dplyr::distinct()
     value <- isolate(input$frequency)
     checkboxGroupInput(inputId  = "frequency",
@@ -109,8 +110,8 @@ server <- function(input, output, session) {
 
   output$dates <- renderUI({
     req(input$dataset)
-    frequencies <- lapply(user_datasets(), function(ds) ds$data$dates) %>%
-      dplyr::bind_rows(.id = "dataset") %>%
+    frequencies <- lapply(user_datasets(), function(ds) ds$data$dates) |>
+      dplyr::bind_rows(.id = "dataset") |>
       dplyr::distinct()
     min <- min(frequencies$date)
     max <- max(frequencies$date)
@@ -213,7 +214,7 @@ server <- function(input, output, session) {
 
   # creates a single df containing all lookups of user selected data
   selected_data_df <- reactive({
-    lapply(filtered_datasets(), function(ds) eddie_object_to_dataframe(ds)) %>%
+    lapply(filtered_datasets(), function(ds) eddie_object_to_dataframe(ds)) |>
       dplyr::bind_rows(.id = "dataset")
   })
 
@@ -224,7 +225,7 @@ server <- function(input, output, session) {
   # line here + 9 to outside ts_transformations()
 
   ggplot_data <- reactive({
-    selected_data_df() %>%
+    selected_data_df() |>
       ts_transformations()
   })
 
@@ -237,7 +238,7 @@ server <- function(input, output, session) {
       return(df)
     } else if (input$transformations == "index" && !is.null(input$transformation_date)) {
       columns_to_group_by <- names(df)[!names(df) %in% c("dataset", "dates", "value")] # TODO this crops up in a few places - global constant?
-      dplyr::group_by(df, dplyr::across(dplyr::all_of(columns_to_group_by))) %>%
+      dplyr::group_by(df, dplyr::across(dplyr::all_of(columns_to_group_by))) |>
         ts_transform_df$index(input$transformation_date)
     }
   }

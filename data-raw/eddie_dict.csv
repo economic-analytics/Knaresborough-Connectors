@@ -38,5 +38,6 @@ geographies,ONS,msoa11,Middle Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,F
 geographies,ONS,lad,Local Authority Districts,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
 names,HOCL,msoanames,MSOA Names,https://houseofcommonslibrary.github.io/msoanames/MSOA-Names-Latest.csv,,,,,,FALSE,FALSE,NA
 dataset,ONSx,RGFCF,Regional Gross Fixed Capital Formation,NA,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
-,,CTSOP,Council Tax Stock of Properties,,,,,,,,TRUE,
-,,SAIE,Small area income estimates,,,,,,,,TRUE,
+,ONSx,CTSOP,Council Tax Stock of Properties,,,,,,,,TRUE,
+,ONSx,SAIE,Small area income estimates,,,,,,,,TRUE,
+,ONSx,SAPE,Small area population estimates,,,,,,,,,
