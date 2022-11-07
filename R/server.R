@@ -25,7 +25,9 @@ server <- function(input, output, session) {
     } else {
       source_object <- eddie_datasets
     }
-    lapply(source_object, function(ds) ds$dimensions$variable$name)
+    lapply(source_object, function(ds) {
+      as.list(ds$dimensions$variable$name)
+    })
   })
 
   output$variable <- renderUI({

@@ -19,6 +19,6 @@ build_input_choices <- function(dimension) {
       return(dimension$name)
     }
   } else {
-    return(dimension$name)
+    return(as.list(dimension$name))
   }
 }
