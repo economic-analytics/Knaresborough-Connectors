@@ -297,9 +297,13 @@ server <- function(input, output, session) {
   # possible next try - read from input obj rather than names(df)
   # Temp fix: all possible dimensions must be listed here
 
-  inputs <- c("geography", "industry", "variable",
-              "employment_sizeband", "legal_status",
-              "non-existent input") # testing options
+  inputs <- lapply(eddie_datasets, \(x) {
+    names(x$dimensions)
+  }) |> unlist() |> unique()
+
+  # inputs <- c("geography", "industry", "variable",
+  #             "employment_sizeband", "legal_status",
+  #             "non-existent input") # testing options
 
   # Generate observers on the available_dimensions (currently hard-coded at inputs)
   lapply(inputs, function(i) {
@@ -347,8 +351,8 @@ server <- function(input, output, session) {
                        panel.grid.major.y = ggplot2::element_line(linetype = "dotted"),
                        legend.position    = "top",
                        axis.line.y.right  = NULL,
-                       axis.line          = ggplot2::element_line() # ,
-                       # text               = ggplot2::element_text(size = 20)
+                       axis.line          = ggplot2::element_line(),
+                       text               = ggplot2::element_text(size = 16)
         )
     }
   })
