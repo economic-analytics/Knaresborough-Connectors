@@ -353,7 +353,8 @@ server <- function(input, output, session) {
                        axis.line.y.right  = NULL,
                        axis.line          = ggplot2::element_line(),
                        text               = ggplot2::element_text(size = 16)
-        )
+        ) +
+        ggplot2::ylim(min(0, min(ggplot_data()$value)), NA)
     }
   })
 
