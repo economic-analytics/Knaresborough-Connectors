@@ -44,6 +44,9 @@ ons_update_datasets <- function(save_separate_rds = FALSE, ...) {
 
   # write separate .rds files for each dataset
   if (save_separate_rds) {
+    if (!dir.exists("data/datasets")) {
+      dir.create("data/datasets")
+    }
     for (i in seq_along(processed)) {
       message("Writing ", names(processed)[i], ".rds ...")
       saveRDS(processed[[i]],

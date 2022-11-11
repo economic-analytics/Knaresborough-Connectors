@@ -12,14 +12,14 @@ server <- function(input, output, session) {
 
   output$variable_filter <- renderUI({
     checkboxInput(inputId = "variable_filter",
-                  label   = "Restrict variable search to selected datasets?",
+                  label   = "Search only selected datasets?",
                   value   = TRUE
     )
   })
 
   # ---
   select_variable_choices <- reactive({
-    req(input$variable_filter, edd_datasets)
+    req(edd_datasets)
     if (input$variable_filter) {
       source_object <- user_datasets()
     } else {
@@ -45,7 +45,8 @@ server <- function(input, output, session) {
     dims_available <- lapply(user_datasets(),
                              function(ds) {
                                names(ds$dimensions)
-                             }) |>
+                             }
+    ) |>
       unlist() |>
       unique()
 
@@ -147,11 +148,12 @@ server <- function(input, output, session) {
     selectizeInput(inputId  = "plot_group",
                    label    = "Select dimensions to plot (colour, facet, linetype, shape)",
                    choices  = available_dimensions(),
-                   selected = if (length(value) > 0) {
+                   selected = if (length(value) > 0)
+                   {
                      value
-                     } else {
-                       "variable"
-                     },
+                   } else {
+                     "variable"
+                   },
                    multiple = TRUE,
                    options  = list(maxItems = 4)
     )
@@ -159,7 +161,7 @@ server <- function(input, output, session) {
 
   output$download_plot <- downloadHandler(
     filename = function() {
-      paste0("edd_plot_", Sys.time(), ".png")
+      paste0("edd_plot_", Sys.Date(), ".png")
     },
     content = function(file) {
       ggplot2::ggsave(file)
@@ -168,7 +170,7 @@ server <- function(input, output, session) {
 
   output$download_data <- downloadHandler(
     filename = function() {
-      paste0("edd_data_", Sys.time(), ".csv")
+      paste0("edd_data_", Sys.Date(), ".csv")
     },
     content = function(file) {
       readr::write_csv(jsonlite::flatten(selected_data_df()), file)
@@ -339,11 +341,11 @@ server <- function(input, output, session) {
         ggplot2::geom_line(size = 1) +
         {if (!is.na(input$plot_group[4])) ggplot2::geom_point(size = 3)} +
         {if (!is.na(input$plot_group[2])) ggplot2::facet_wrap(as.formula(paste0("~ ", input$plot_group[2], "$name")))} +
-        ggplot2::labs(x        = "",
+        ggplot2::labs(x        = NULL,
                       y        = "Value",
                       title    = "Chart title",
                       subtitle = "Chart subtitle",
-                      caption  = "Source: Office for National Statistics\nPowered by EDD",
+                      caption  = plot_caption(input$dataset),
                       colour   = stringr::str_to_sentence(input$plot_group[1]),
                       linetype = stringr::str_to_sentence(input$plot_group[3]),
                       shape    = stringr::str_to_sentence(input$plot_group[4])
