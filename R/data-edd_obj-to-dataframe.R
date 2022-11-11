@@ -1,9 +1,9 @@
-eddie_object_to_dataframe <- function(eddie_object) {
+edd_obj_to_dataframe <- function(edd_obj) {
   # identify all dimensions in the df that's been passed in
-  dims <- names(eddie_object$dimensions)
-  data <- eddie_object$data
+  dims <- names(edd_obj$dimensions)
+  data <- edd_obj$data
   for (d in seq_along(dims)) {
-    dimension <- eddie_object[["dimensions"]][[d]]
+    dimension <- edd_obj[["dimensions"]][[d]]
     data <- dplyr::left_join(
       data,
       dimension %>% dplyr::select(name, code), # the select restriction is in place until we can dynamically handle $unit, $type, etc.

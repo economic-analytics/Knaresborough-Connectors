@@ -1,11 +1,11 @@
-# This converts a (appropriately defined) df into a eddiebj
+# This converts a (appropriately defined) df into a edd_obj
 # DF should contain a date column and a value column as a minimum
-# Dimensions should be labelled as appropriate, checking with eddie_dict
+# Dimensions should be labelled as appropriate, checking with edd_dict
 # for naming conventions. If dimensions have multiple columns for codes, names,
 # types, etc., they should be defined as [dimension]_[extra], e.g.
 # geography_code, geography_name, etc.
 
-# df_to_eddieobj <- function(df) {
+# df_to_edd_obj <- function(df) {
 #   # error handling
 #   if (!is.data.frame(df)) {
 #     stop("Object `df` is not a data frame")
@@ -32,8 +32,8 @@
 
 # testing -----------------------------------------------------------------
 
-df_to_eddieobj <- function(df) {
-  # TODO insert eddieobj verification here
+df_to_edd_obj <- function(df) {
+  # TODO insert edd_obj verification here
 
   # build data df
   data <- df |>
@@ -60,13 +60,13 @@ df_to_eddieobj <- function(df) {
   meta <- tibble::tibble()
 
   # combine to list
-  eddieobj <- list()
-  eddieobj$data <- data
-  eddieobj$dimensions <- dimensions
-  eddieobj$meta <- meta
+  edd_obj <- list()
+  edd_obj$data <- data
+  edd_obj$dimensions <- dimensions
+  edd_obj$meta <- meta
 
   # TODO insert final validation checks
   # TODO insert checking for metadata if empty
 
-  return(eddieobj)
+  return(edd_obj)
 }

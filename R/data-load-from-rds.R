@@ -2,7 +2,7 @@ dataFileLocation <- "data/datasets.knaresborough"
 
 dataFiles <- list.files(dataFileLocation, full.names = TRUE)
 
-eddie_datasets <- lapply(dataFiles, \(x) readRDS(x)) |>
+edd_datasets <- lapply(dataFiles, \(x) readRDS(x)) |>
   setNames(tools::file_path_sans_ext(basename(dataFiles)))
 
 

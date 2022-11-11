@@ -5,7 +5,7 @@ server <- function(input, output, session) {
   output$dataset <- renderUI({
     selectInput(inputId  = "dataset",
                 label    = "Select dataset(s)",
-                choices  = eddie_dict$desc[eddie_dict$id %in% names(eddie_datasets)],
+                choices  = edd_dict$desc[edd_dict$id %in% names(edd_datasets)],
                 multiple = TRUE
     )
   })
@@ -19,11 +19,11 @@ server <- function(input, output, session) {
 
   # ---
   select_variable_choices <- reactive({
-    req(input$variable_filter, eddie_datasets)
+    req(input$variable_filter, edd_datasets)
     if (input$variable_filter) {
       source_object <- user_datasets()
     } else {
-      source_object <- eddie_datasets
+      source_object <- edd_datasets
     }
     lapply(source_object, function(ds) {
       as.list(ds$dimensions$variable$name)
@@ -77,7 +77,9 @@ server <- function(input, output, session) {
   })
 
    transformation_date_choices <- reactive({
-    df <- selected_data_df() |>
+    # allows selection only of those dates which are available for all of the
+    # data currently displayed on the plot
+     df <- selected_data_df() |>
       dplyr::group_by(dates$date) |>
       dplyr::summarise(n = dplyr::n()) |>
       dplyr::filter(n == max(n))
@@ -157,7 +159,7 @@ server <- function(input, output, session) {
 
   output$download_plot <- downloadHandler(
     filename = function() {
-      paste0("EDDIE_plot_", Sys.time(), ".png")
+      paste0("edd_plot_", Sys.time(), ".png")
     },
     content = function(file) {
       ggplot2::ggsave(file)
@@ -166,7 +168,7 @@ server <- function(input, output, session) {
 
   output$download_data <- downloadHandler(
     filename = function() {
-      paste0("EDDIE_data_", Sys.time(), ".csv")
+      paste0("edd_data_", Sys.time(), ".csv")
     },
     content = function(file) {
       readr::write_csv(jsonlite::flatten(selected_data_df()), file)
@@ -175,16 +177,16 @@ server <- function(input, output, session) {
 
   # Reactive Objects --------------------------------------------------------
 
-  # LIST of eddie dataset objects in use by the user
+  # LIST of edd dataset objects in use by the user
   user_datasets <- reactive({
-    eddie_datasets[eddie_dict$id[eddie_dict$desc %in% input$dataset]]
+    edd_datasets[edd_dict$id[edd_dict$desc %in% input$dataset]]
   })
 
-  # LIST of eddie dataset objects whose $data df has been filtered
+  # LIST of edd dataset objects whose $data df has been filtered
   filtered_datasets <- reactive({
-    lapply(user_datasets(), function(eddie_obj) {
-      dims <- names(eddie_obj$dimensions)
-      data <- eddie_obj$data
+    lapply(user_datasets(), function(edd_obj) {
+      dims <- names(edd_obj$dimensions)
+      data <- edd_obj$data
       for (d in seq_along(dims)) {
         # TODO should we let all data through if input is NULL, or should we let
         # no data through if input is NULL?
@@ -192,8 +194,8 @@ server <- function(input, output, session) {
         if (1 == 1) { #!is.null(input[[dims[[d]]]])) {
           data <- dplyr::filter(data,
                                 .data[[dims[[d]]]] %in%
-                                  eddie_obj$dimensions[[dims[[d]]]]$code[
-                                    eddie_obj$dimensions[[dims[[d]]]]$name %in%
+                                  edd_obj$dimensions[[dims[[d]]]]$code[
+                                    edd_obj$dimensions[[dims[[d]]]]$name %in%
                                       input[[dims[[d]]]]]
           )
         }
@@ -206,8 +208,8 @@ server <- function(input, output, session) {
                             dates$freq %in% input$frequency
       )
 
-      eddie_obj$data <- data
-      eddie_obj
+      edd_obj$data <- data
+      edd_obj
     })
   })
 
@@ -216,7 +218,7 @@ server <- function(input, output, session) {
 
   # creates a single df containing all lookups of user selected data
   selected_data_df <- reactive({
-    lapply(filtered_datasets(), function(ds) eddie_object_to_dataframe(ds)) |>
+    lapply(filtered_datasets(), function(ds) edd_obj_to_dataframe(ds)) |>
       dplyr::bind_rows(.id = "dataset")
   })
 
@@ -297,7 +299,7 @@ server <- function(input, output, session) {
   # possible next try - read from input obj rather than names(df)
   # Temp fix: all possible dimensions must be listed here
 
-  inputs <- lapply(eddie_datasets, \(x) {
+  inputs <- lapply(edd_datasets, \(x) {
     names(x$dimensions)
   }) |> unlist() |> unique()
 

@@ -1,5 +1,5 @@
-Package: eddie
-Title: EDDIE - Economic Data Dashboard with Integrated Exploration
+Package: edd
+Title: EDD - Economic Data Dashboard
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Christian",

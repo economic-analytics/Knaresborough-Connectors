@@ -1,5 +1,5 @@
 # This file contains all of the functions required to download all ONS datasets
-# within the fedo_dict and process them into the fedobj format with data,
+# within the edd_dict and process them into the edd_obj format with data,
 # variables and meta information in separate lists within lists for each
 # time series object
 
@@ -12,7 +12,7 @@ ons_update_datasets <- function(save_separate_rds = FALSE, ...) {
   Sys.setenv("VROOM_CONNECTION_SIZE" = "500000")
 
   # conditions within fedo_dict to update on
-  to_update <- eddie_dict %>%
+  to_update <- edd_dict %>%
     dplyr::filter(type     == "dataset",
                   provider == "ONS",
                   status   == TRUE)
