@@ -351,12 +351,10 @@ server <- function(input, output, session) {
                        axis.line          = ggplot2::element_line(),
                        text               = ggplot2::element_text(size = 16)
         ) +
-        {if (input$y_axis_zero) ggplot2::ylim(min(0, min(ggplot_data()$value)), NA)} +
         {if (input$Colour == "") NULL else ggplot2::guides(colour = ggplot2::guide_legend(nrow = 2))} +
         {if (input$Linetype == "") NULL else ggplot2::guides(linetype = ggplot2::guide_legend(nrow = 2))} +
         {if (input$Shape == "") NULL else ggplot2::guides(shape = ggplot2::guide_legend(nrow = 2))} +
-        ggplot2::scale_y_continuous(labels = scales::label_comma())
-
+        {if (input$y_axis_zero) ggplot2::scale_y_continuous(labels = scales::label_comma(), limits = c(min(0, min(ggplot_data()$value)), NA)) else ggplot2::scale_y_continuous(labels = scales::label_comma())}
     }
   })
 
