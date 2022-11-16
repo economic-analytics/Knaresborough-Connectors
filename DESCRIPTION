@@ -21,6 +21,7 @@ Imports:
     magrittr,
     pkgload,
     readr,
+    scales,
     sf,
     shiny,
     stringr
