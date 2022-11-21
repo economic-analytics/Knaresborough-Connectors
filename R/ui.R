@@ -14,7 +14,6 @@ ui <- navbarPage(
     sidebarLayout(
       sidebarPanel(
         tabsetPanel(id = "datatool_sidebar_tabs",
-                    # type = "pills",
 
                     tabPanel(title = "Select by dataset",
                              uiOutput("dataset"),
@@ -36,7 +35,8 @@ ui <- navbarPage(
 
                     tabPanel(title = "Chart",
                              sidebarLayout(
-                               sidebarPanel(p(strong("Chart options")),
+                               sidebarPanel(
+                                 p(strong("Chart options")),
                                  tabsetPanel(
                                    tabPanel("Plot aesthetics",
                                             uiOutput("plot_aes"),

@@ -29,4 +29,4 @@ The data storage model is based on [Tidy Data](https://vita.had.co.nz/papers/tid
 
 ## Using EDD
 
-EDD is currently deployed on the web at [https://economic-analytics.shinyapps.io/edd/](https://economic-analytics.shinyapps.io/edd/).
+EDD is currently deployed on the web at [https://christianspence.shinyapps.io/edd-app/](https://christianspence.shinyapps.io/edd-app/).

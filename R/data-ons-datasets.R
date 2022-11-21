@@ -6,19 +6,19 @@
 
 # Master function (for export) --------------------------------------------
 
-ons_update_datasets <- function(save_separate_rds = FALSE, ...) {
+ons_update_datasets <- function(save_separate_rds = TRUE, ...) {
   # problems with VROOM_CONNECTION_SIZE means we have to set this as the
   # download is large and overflows the connection buffer
   Sys.setenv("VROOM_CONNECTION_SIZE" = "500000")
 
-  # conditions within fedo_dict to update on
+  # conditions within edd_dict to update on
   to_update <- edd_dict %>%
     dplyr::filter(type     == "dataset",
                   provider == "ONS",
                   status   == TRUE)
 
   # TODO need to add condition for last_updated but need to implement the
-  # writing back of the meta data to the fedo_dict first
+  # writing back of the meta data to the edd_dict first
 
   datasets <- lapply(to_update$url,
                      function(url) {
@@ -87,8 +87,7 @@ ons_download_dataset <- function(url, save_csv = FALSE) {
 
 # Process raw df (not for export) -----------------------------------------
 
-# this function parses the downloaded csv files and puts them into the fea
-# data shape
+# this function parses the downloaded csv files and puts them into an edd_obj
 ons_process_dataset <- function(dataset, new_format = FALSE) {
   if (new_format) {
     variable <- dataset[1:4, ]
@@ -182,12 +181,11 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
 
     # readr::write_rds(ons_datasets, "../../Data/ONS/ons_datasets.rds")
 
-    # TODO write back meta to fedo_dict ####
+    # TODO write back meta to edd_dict ####
 
 
     # TODO write rds objects for each dataset ####
     # TODO write rds object for list of datasets? only updated ones? ####
-    # TODO write to sql for each object ####
 
     return(processed)
   }
@@ -199,7 +197,7 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
 # the frequency argument allows the return of a column marked "a", "m" or "q"
 # to denote the frequency of the data for each date.
 #
-# NB IT ALWAYS RETURNS A DATA FRAME. FEA OBJECTS MUST REFERENCE dates$date
+# NB IT ALWAYS RETURNS A DATA FRAME. EDD_OBJs MUST REFERENCE dates$date
 # AND dates$freq TO DEAL WITH THE DATA FRAME IN THE DATA FRAME. THIS WILL ALLOW
 # THE ADDITION OF ADDITIONAL FIELDS IF REQUIRED, E.G. dates$text FOR A MORE
 # HUMAN-READABLE VERSION OF DATES. THIS IS NOT YET IMPLEMENTED.
