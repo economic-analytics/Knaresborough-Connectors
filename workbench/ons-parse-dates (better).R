@@ -8,7 +8,7 @@ ons_parse_dates <- function(dates) {
       date <- lubridate::yq(d)
       freq <- "q"
     } else if (grepl("[0-9]{4}$", d)) { # if contains four digits at the end
-      date <- lubridate::dmy(d, truncated = 1)
+      date <- lubridate::my(d)
       freq <- "m"
     } else if (grepl("^[0-9]{4}", d)) { # if it contains four digits at the beginning
       date <- lubridate::ymd(d, truncated = 1)
@@ -17,6 +17,7 @@ ons_parse_dates <- function(dates) {
       date <- as.Date(NA) # if none of the above parse, return an NA to highlight the problem
       freq <- NA_character_
     }
-    df = data.frame(date = date, freq = freq)
+    df = tibble::tibble(date = date,
+                        freq = freq)
   })
 }

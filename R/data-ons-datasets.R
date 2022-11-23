@@ -108,7 +108,7 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
 
     names(dataset) <- c("date", as.character(dataset[2, -1]))
     dataset <- dataset[-(1:7), ]
-    dataset$date <- purrr::map_df(dataset$date, ons_parse_dates, frequency = TRUE)
+    dataset$date <- date_text_to_df(dataset$date)
     dataset <- tidyr::pivot_longer(dataset, cols = -date, names_to = "variable")
     dataset$value <- as.numeric(dataset$value)
 
@@ -133,7 +133,7 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
     data  <- dataset[-(1:7), ]
 
     # prepare data
-    data$dates <- purrr::map_df(data$dates, ons_parse_dates, frequency = TRUE)
+    data$dates <- date_text_to_df(data$dates)
     data <- tidyr::pivot_longer(data, -dates, names_to = "variable", values_to = "value")
     data$value <- as.numeric(data$value)
     data <- dplyr::filter(data, !is.na(value))
@@ -150,8 +150,8 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
     meta <- meta[-1, ]
     meta <- unique(meta)
 
-    last_update <- ons_parse_dates(unique(meta$last_update))
-    next_update <- ons_parse_dates(unique(meta$next_update))
+    last_update <- date_text_to_df(unique(meta$last_update))
+    next_update <- date_text_to_df(unique(meta$next_update))
     notes <- unique(na.omit(meta$notes))
 
     meta <- tibble::tibble(last_update = last_update,
@@ -207,33 +207,35 @@ ons_process_dataset <- function(dataset, new_format = FALSE) {
 #
 # TODO there should probably be a test to see if any of the dates processed
 # return an NA (i.e. not parseable) and, if so, print a warning message
-ons_parse_dates <- function(dates, frequency = FALSE) {
-  # if the date is four digits only, i.e. a year and annual
-  if (grepl("^[0-9]{4}$", dates)) {
-    date <- readr::parse_date(dates, format = "%Y")
-    freq <- "a"
-  } else if (grepl("Q", dates)) { # if the date contains a "Q", i.e. quarterly
-    date <- lubridate::yq(dates)
-    freq <- "q"
-  } else if (grepl("[0-9]{4}$", dates)) { # if contains four digits at the end
-    date <- lubridate::dmy(dates, truncated = 1)
-    freq <- "m"
-  } else if (grepl("^[0-9]{4}", dates)) { # if it contains four digits at the beginning
-    date <- lubridate::ymd(dates, truncated = 1)
-    freq <- "m"
-  } else {
-    date <- as.Date(NA) # if none of the above parse, return an NA to highlight the problem
-    freq <- NA_character_
-  }
-  if (frequency) {
-    # return a two-column data frame
-    df <- tibble::tibble(date = date, freq = freq)
-  } else {
-    # return a one-column data frame
-    df <- tibble::tibble(date = date)
-  }
-    # WHEN NA CHECKER TO BE IMPLEMENTED IT SHOULD GO HERE AND CHECK THE df$date
-    # VARIABLE FOR PRESENCE OF NAs
-    return(df)
-}
+
+# DEPRECATED #####
+# ons_parse_dates <- function(dates, frequency = FALSE) {
+#   # if the date is four digits only, i.e. a year and annual
+#   if (grepl("^[0-9]{4}$", dates)) {
+#     date <- readr::parse_date(dates, format = "%Y")
+#     freq <- "a"
+#   } else if (grepl("Q", dates)) { # if the date contains a "Q", i.e. quarterly
+#     date <- lubridate::yq(dates)
+#     freq <- "q"
+#   } else if (grepl("[0-9]{4}$", dates)) { # if contains four digits at the end
+#     date <- lubridate::dmy(dates, truncated = 1)
+#     freq <- "m"
+#   } else if (grepl("^[0-9]{4}", dates)) { # if it contains four digits at the beginning
+#     date <- lubridate::ymd(dates, truncated = 1)
+#     freq <- "m"
+#   } else {
+#     date <- as.Date(NA) # if none of the above parse, return an NA to highlight the problem
+#     freq <- NA_character_
+#   }
+#   if (frequency) {
+#     # return a two-column data frame
+#     df <- tibble::tibble(date = date, freq = freq)
+#   } else {
+#     # return a one-column data frame
+#     df <- tibble::tibble(date = date)
+#   }
+#     # WHEN NA CHECKER TO BE IMPLEMENTED IT SHOULD GO HERE AND CHECK THE df$date
+#     # VARIABLE FOR PRESENCE OF NAs
+#     return(df)
+# }
 
