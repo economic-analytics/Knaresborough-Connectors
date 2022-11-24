@@ -128,7 +128,7 @@ edd_df_to_edd_obj <- function(edd_df) {
 generate_dimension_total <- function(df, dimension,
                                      dimension_plural = dimension) {
 
-  vars_to_group_by <- names(df)[!grepl(paste0("^", dimension), names(df)) | names(df) == "value"]
+  vars_to_group_by <- names(df)[!grepl(paste0("^", dimension), names(df)) & names(df) != "value"]
 
   out_df <- df |>
     dplyr::group_by(dplyr::across(vars_to_group_by)) |>
@@ -144,7 +144,7 @@ add_hocl_msoa_names <- function(df, code_col) {
 
   if (!file.exists("data-raw/MSOA-Names-Latest.csv")) {
     file_url <- "https://houseofcommonslibrary.github.io/msoanames/MSOA-Names-Latest.csv"
-    download.file(file_url, file.path("data-raw", basename(fileurl)))
+    download.file(file_url, file.path("data-raw", basename(file_url)))
   }
 
   hocl_msoa_names <- readr::read_csv("data-raw/MSOA-Names-Latest.csv") |>
