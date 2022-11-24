@@ -140,7 +140,7 @@ generate_dimension_total <- function(df, dimension,
   dplyr::bind_rows(df, out_df)
 }
 
-add_hocl_msoa_names <- function(df, code_col) {
+add_hocl_msoa_names <- function(df, code_col = "geography_code") {
 
   if (!file.exists("data-raw/MSOA-Names-Latest.csv")) {
     file_url <- "https://houseofcommonslibrary.github.io/msoanames/MSOA-Names-Latest.csv"
@@ -158,3 +158,18 @@ add_hocl_msoa_names <- function(df, code_col) {
   return(tibble::as_tibble(out_df))
 }
 
+data_bres_add_emp_status_options <- function(df) {
+  pivot_cols <- names(df)[grepl("^employment_status", names(df))]
+
+  df2 <- df |>
+    tidyr::pivot_wider(names_from = dplyr::all_of(pivot_cols),
+                       values_from = value) |>
+    dplyr::mutate(`Other employment_O_Employment` = Employment_4_Employment - Employees_1_Employment,
+                  `FTE_F_Employment` = `Other employment_O_Employment` + `Full-time employees_2_Employment` + (0.5 * `Part-time employees_3_Employment`))
+
+  out_df <- df2 |>
+    tidyr::pivot_longer(cols = names(df2)[!names(df2) %in% names(df)],
+                        names_to = pivot_cols, names_sep = "_")
+
+  return(out_df)
+}

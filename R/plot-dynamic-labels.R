@@ -11,7 +11,12 @@ plot_caption <- function(datasets) {
     if (length(unique(caption_df$provider)) == 1) {
       caption <- paste(caption_df$provider,
                        paste(caption_df$desc, collapse = ", "))
+    } else {
+      caption <- paste(caption_df$provider, collapse = ", ",
+                       paste(caption_df$desc, collapse = ", "))
     }
+  } else {
+    caption <- "[sources]"
   }
 
   return(paste0("Source: ", caption, "\nPowered by EDD"))
