@@ -1,6 +1,17 @@
 server <- function(input, output, session) {
 
-# UI Rendering --------------------------------------------------------------
+# Bookmarking (persistent URLs) -------------------------------------------
+
+  # Automatically bookmark every time an input changes
+  observe({
+    reactiveValuesToList(input)
+    session$doBookmark()
+  })
+
+  # Update the query string
+  onBookmarked(updateQueryString)
+
+# UI Rendering ------------------------------------------------------------
 
   output$dataset <- renderUI({
     selectInput(inputId  = "dataset",
@@ -10,34 +21,38 @@ server <- function(input, output, session) {
     )
   })
 
-  output$variable_filter <- renderUI({
-    checkboxInput(inputId = "variable_filter",
-                  label   = "Search only selected datasets?",
-                  value   = TRUE
-    )
-  })
+  # output$variable_filter <- renderUI({
+  #   checkboxInput(inputId = "variable_filter",
+  #                 label   = "Search only selected datasets?",
+  #                 value   = TRUE
+  #   )
+  # })
+  #
+  # select_variable_choices <- reactive({
+  #   req(edd_datasets, user_datasets())
+  #   if (input$variable_filter) {
+  #     source_object <- user_datasets()
+  #   } else {
+  #     source_object <- edd_datasets
+  #   }
+  #   lapply(source_object, function(ds) {
+  #     as.list(ds$dimensions$variable$name)
+  #   })
+  # })
 
-  select_variable_choices <- reactive({
-    req(edd_datasets)
-    if (input$variable_filter) {
-      source_object <- user_datasets()
-    } else {
-      source_object <- edd_datasets
-    }
-    lapply(source_object, function(ds) {
-      as.list(ds$dimensions$variable$name)
-    })
-  })
-
-  output$variable <- renderUI({
-    value <- isolate(input$variable)
-    selectInput(inputId  = "variable",
-                label    = "Select variable",
-                choices  = select_variable_choices(),
-                selected = value,
-                multiple = TRUE
-    )
-  })
+  # output$variable <- renderUI({
+  #   req(edd_datasets, user_datasets()) # -------
+  #   value <- isolate(input$variable)
+  #   selectInput(inputId  = "variable",
+  #               label    = "Select variable",
+  #               # choices  = select_variable_choices(),
+  #               choices = lapply(user_datasets(), function(ds) {
+  #                 as.list(ds$dimensions$variable$name)
+  #               }),
+  #               selected = value,
+  #               multiple = TRUE
+  #   )
+  # })
 
   output$dimensions <- renderUI({
     dims_available <- lapply(user_datasets(),
@@ -48,7 +63,7 @@ server <- function(input, output, session) {
       unlist() |>
       unique()
 
-    dims_available <- dims_available[dims_available != "variable"]
+    # dims_available <- dims_available[dims_available != "variable"]
     lapply(dims_available, function(i) {
       value <- isolate(input[[i]])
       selectInput(i,
@@ -144,6 +159,7 @@ server <- function(input, output, session) {
   plot_aesthetics <- c("Colour", "Facet", "Linetype", "Shape")
 
   output$plot_aes <- renderUI({
+    req(available_dimensions())
     # dims <- isolate(available_dimensions())
 
     lapply(plot_aesthetics, function(aes) {
@@ -308,12 +324,10 @@ server <- function(input, output, session) {
   # Generate observers on the available_dimensions
   lapply(inputs, function(i) {
     observeEvent(input[[i]], {
-      # print(input[[i]]) # testing only
-      # print(inputs) # testing only
       manage_plot_group(i)
-    },
-    ignoreNULL = FALSE,
-    ignoreInit = TRUE
+    }#,
+    #ignoreNULL = FALSE,
+    #ignoreInit = TRUE
     )
   }
   )

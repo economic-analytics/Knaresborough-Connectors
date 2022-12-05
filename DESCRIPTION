@@ -18,12 +18,14 @@ Imports:
     DT,
     ggplot2,
     leaflet,
+    lubridate,
     magrittr,
     pkgload,
     readr,
     scales,
     sf,
     shiny,
-    stringr
+    stringr,
+    tidyr
 Depends: 
     R (>= 4.2)
