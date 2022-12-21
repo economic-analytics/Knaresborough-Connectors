@@ -1,9 +1,9 @@
 ﻿type,provider,id,desc,url,eddie_file_loc,eddie_sql_loc,last_update,next_update,last_download,status,obj_available,notes
-lookup,ONS,NSPL,National Statistics Postcode Lookup,NA,/ons/nspl,NA,NA,NA,NA,FALSE,FALSE,NA
-lookup,ONS,NSAL,National Statistics Address Lookup,NA,/ons/nsal,NA,NA,NA,NA,FALSE,FALSE,NA
-lookup,ONS,ONSPD,ONS Postcode Directory,NA,/ons/onspd,NA,NA,NA,NA,FALSE,FALSE,NA
-dataset,ONS,BB,"UK National Accounts, The Blue Book",https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/bluebook/current/bb.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
-dataset,ONS,CXNV,Business Investment,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/businessinvestment/current/cxnv.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
+lookup,ONSx,NSPL,National Statistics Postcode Lookup,NA,/ons/nspl,NA,NA,NA,NA,FALSE,FALSE,NA
+lookup,ONSx,NSAL,National Statistics Address Lookup,NA,/ons/nsal,NA,NA,NA,NA,FALSE,FALSE,NA
+lookup,ONSx,ONSPD,ONS Postcode Directory,NA,/ons/onspd,NA,NA,NA,NA,FALSE,FALSE,NA
+dataset,ONS,BB,"UK National Accounts, The Blue Book",https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/bluebook/current/bb.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
+dataset,ONS,CXNV,Business Investment,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/businessinvestment/current/cxnv.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,DIOP,Index of Production,https://www.ons.gov.uk/file?uri=/economy/economicoutputandproductivity/output/datasets/indexofproduction/current/diop.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,DRSI,Retail Sales Index,https://www.ons.gov.uk/file?uri=/businessindustryandtrade/retailindustry/datasets/retailsales/current/drsi.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,EMP,Average Weekly Earnings,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/averageweeklyearnings/current/emp.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
@@ -15,27 +15,27 @@ dataset,ONS,MM23,Consumer Price Inflation,https://www.ons.gov.uk/file?uri=/econo
 dataset,ONS,MRET,UK Trade,https://www.ons.gov.uk/file?uri=/economy/nationalaccounts/balanceofpayments/datasets/tradeingoodsmretsallbopeu2013timeseriesspreadsheet/current/mret.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,PDGP,Preliminary Estimate of GDP,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/preliminaryestimateofgdp/current/pgdp.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,Ceased publication April 2018
 dataset,ONS,PN2,GDP First Quarterly Estimate,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/secondestimateofgdp/current/pn2.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
-dataset,ONS,PRDY,Labour Productivity,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/labourproductivity/current/prdy.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
+dataset,ONS,PRDY,Labour Productivity,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/labourproductivity/current/prdy.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,PSE,Public Sector Employment,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/publicsectorpersonnel/datasets/publicsectoremploymenttimeseriesdataset/current/pse.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,PUSF,Public Sector Finances,https://www.ons.gov.uk/file?uri=/economy/governmentpublicsectorandtaxes/publicsectorfinance/datasets/publicsectorfinances/current/pusf.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
-dataset,ONS,QNA,GDP Quarterly National Accounts,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/quarterlynationalaccounts/current/qna.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
-dataset,ONS,RPRD,Regional Productivity,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/regionalproductivitytimeseries/current/rprd.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
+dataset,ONS,QNA,GDP Quarterly National Accounts,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/quarterlynationalaccounts/current/qna.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
+dataset,ONS,RPRD,Regional Productivity,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/regionalproductivitytimeseries/current/rprd.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,TOPSI,Turnover in UK Production and GB Services,https://www.ons.gov.uk/file?uri=/businessindustryandtrade/manufacturingandproductionindustry/datasets/turnoverandordersintheproductionandservicesindustriesdataset/current/topsi.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
-dataset,ONS,UCST,Unit Labour Cost and Unit Wage Cost,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/unitlabourcostandunitwagecosttimeseries/current/ucst.csv,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
+dataset,ONS,UCST,Unit Labour Cost and Unit Wage Cost,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peopleinwork/labourproductivity/datasets/unitlabourcostandunitwagecosttimeseries/current/ucst.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,UKEA,UK Economic Accounts,https://www.ons.gov.uk/file?uri=/economy/grossdomesticproductgdp/datasets/unitedkingdomeconomicaccounts/current/ukea.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,ONS,UNEM,Claimant Count and Vacancies,https://www.ons.gov.uk/file?uri=/employmentandlabourmarket/peoplenotinwork/unemployment/datasets/claimantcountandvacanciesdataset/current/unem.csv,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 dataset,BOE,FEA,Custom,"https://www.bankofengland.co.uk/boeapps/iadb/fromshowcolumns.asp?csv.x=yes&Datefrom=01/Jan/2005&Dateto=Now&SeriesCodes=IUMBEDR,IUMAMNPY,IUMAAMIJ,XUMAUSS,XUMAERS&CSVF=TN&UsingCodes=Y&VPD=Y&VFD=N",/boe/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
-dataset,ONS,RGVA,Regional GVA,NA,/ons/datasets,NA,NA,NA,NA,FALSE,TRUE,NA
-dataset,ONS,RGVAI,Regional GVA (Income components),NA,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
+dataset,ONSx,RGVA,Regional GVA,NA,/ons/datasets,NA,NA,NA,NA,FALSE,TRUE,NA
+dataset,ONSx,RGVAI,Regional GVA (Income components),NA,/ons/datasets,NA,NA,NA,NA,FALSE,FALSE,NA
 dataset,NOMIS,BRES,Business Register and Employment Survey,NA,/nomis/datasets,NA,NA,NA,NA,FALSE,TRUE,NA
 dataset,NOMIS,UKBC,UK Business Counts,NA,/nomis/datasets,NA,NA,NA,NA,FALSE,TRUE,NA
-boundaries,ONS,oa11,Output Areas,NA,/boundaries/ons/oa11,NA,NA,NA,NA,FALSE,FALSE,NA
-boundaries,ONS,lsoa11,Lower Layer Super Output Areas,NA,/boundaries/ons/lsoa11,NA,NA,NA,NA,FALSE,FALSE,NA
-boundaries,ONS,msoa11,Middle Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
-geographies,ONS,oa11,Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
-geographies,ONS,lsoa11,Lower Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
-geographies,ONS,msoa11,Middle Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
-geographies,ONS,lad,Local Authority Districts,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
+boundaries,ONSx,oa11,Output Areas,NA,/boundaries/ons/oa11,NA,NA,NA,NA,FALSE,FALSE,NA
+boundaries,ONSx,lsoa11,Lower Layer Super Output Areas,NA,/boundaries/ons/lsoa11,NA,NA,NA,NA,FALSE,FALSE,NA
+boundaries,ONSx,msoa11,Middle Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
+geographies,ONSx,oa11,Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
+geographies,ONSx,lsoa11,Lower Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
+geographies,ONSx,msoa11,Middle Layer Super Output Areas,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
+geographies,ONSx,lad,Local Authority Districts,NA,NA,NA,NA,NA,NA,FALSE,FALSE,NA
 names,HOCL,msoanames,MSOA Names,https://houseofcommonslibrary.github.io/msoanames/MSOA-Names-Latest.csv,,,,,,FALSE,FALSE,NA
 dataset,ONSx,RGFCF,Regional Gross Fixed Capital Formation,NA,/ons/datasets,NA,NA,NA,NA,TRUE,FALSE,NA
 ,VOA,CTSOP,Council Tax Stock of Properties,,,,,,,,TRUE,
@@ -44,4 +44,5 @@ dataset,ONSx,RGFCF,Regional Gross Fixed Capital Formation,NA,/ons/datasets,NA,NA
 ,ONSx,HPSSA2,Median House Price by Property Type (MSOA),,,,,,,,,
 ,TEST,TEST,TEST,,,,,,,,,
 ,NOMIS,CC,Claimant Count,,,,,,,,,
-,,RGDHI,Regional Gross Disposable Household Income,,,,,,,,,
+,ONSx,RGDHI,Regional Gross Disposable Household Income,,,,,,,,,
+,ONSx,RFDI,Regional Foreign Direct Investment,,,,,,,,,

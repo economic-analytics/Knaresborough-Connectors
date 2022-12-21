@@ -5,9 +5,7 @@ plot_caption <- function(datasets) {
 
   if (length(datasets) == 1) {
     caption <- paste(caption_df$provider, caption_df$desc)
-  }
-
-  if (length(datasets) > 1) {
+  } else if (length(datasets) > 1) {
     if (length(unique(caption_df$provider)) == 1) {
       caption <- paste(caption_df$provider,
                        paste(caption_df$desc, collapse = ", "))
