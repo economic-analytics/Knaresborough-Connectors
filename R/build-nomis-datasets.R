@@ -144,7 +144,7 @@ add_hocl_msoa_names <- function(df, code_col = "geography_code") {
 
   if (!file.exists("data-raw/MSOA-Names-Latest.csv")) {
     file_url <- "https://houseofcommonslibrary.github.io/msoanames/MSOA-Names-Latest.csv"
-    download.file(file_url, file.path("data-raw", basename(file_url)))
+    download.file(file_url, file.path("data-raw", basename(file_url)), mode = "wb")
   }
 
   hocl_msoa_names <- readr::read_csv("data-raw/MSOA-Names-Latest.csv") |>
