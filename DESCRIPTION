@@ -17,13 +17,11 @@ Imports:
     dplyr,
     DT,
     ggplot2,
-    leaflet,
     lubridate,
     magrittr,
     pkgload,
     readr,
     scales,
-    sf,
     shiny,
     stringr,
     tidyr

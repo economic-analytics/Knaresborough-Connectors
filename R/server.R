@@ -273,18 +273,18 @@ server <- function(input, output, session) {
   # *INCLUDING* date but *EXCEPT* geography - all geog_levels from UI select
   # [geog_type] should be included
 
-  output$map_date_select <- renderUI({
-    sliderInput(inputId = "map_date_select",
-                label   = "Select date",
-                min     = min(data_to_plot()$dates$date),
-                max     = max(data_to_plot()$dates$date),
-                value   = max(data_to_plot()$dates$date)
-    )
-  })
+  # output$map_date_select <- renderUI({
+  #   sliderInput(inputId = "map_date_select",
+  #               label   = "Select date",
+  #               min     = min(data_to_plot()$dates$date),
+  #               max     = max(data_to_plot()$dates$date),
+  #               value   = max(data_to_plot()$dates$date)
+  #   )
+  # })
 
-  map_pal <- reactive({
-    leaflet::colorNumeric("YlOrRd", domain = map_data()$value)
-  })
+  # map_pal <- reactive({
+  #   leaflet::colorNumeric("YlOrRd", domain = map_data()$value)
+  # })
 
 # Plot Logic --------------------------------------------------------------
 
